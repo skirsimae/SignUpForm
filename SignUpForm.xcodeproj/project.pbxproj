@@ -11,14 +11,18 @@
 		8864075A277A35B2001446A6 /* SignUpForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88640759277A35B2001446A6 /* SignUpForm.swift */; };
 		8864075C277A35B4001446A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8864075B277A35B4001446A6 /* Assets.xcassets */; };
 		8864075F277A35B4001446A6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8864075E277A35B4001446A6 /* Preview Assets.xcassets */; };
+		AB2FDEA8F804F76A20D55D3C /* Pods_SignUpForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7FF96EBED300A930C52A08 /* Pods_SignUpForm.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C7FF96EBED300A930C52A08 /* Pods_SignUpForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignUpForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6909CBD317C594B5BFEBBED2 /* Pods-SignUpForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignUpForm.debug.xcconfig"; path = "Target Support Files/Pods-SignUpForm/Pods-SignUpForm.debug.xcconfig"; sourceTree = "<group>"; };
 		88640754277A35B2001446A6 /* SignUpForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignUpForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88640757277A35B2001446A6 /* SignUpFormApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormApp.swift; sourceTree = "<group>"; };
 		88640759277A35B2001446A6 /* SignUpForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpForm.swift; sourceTree = "<group>"; };
 		8864075B277A35B4001446A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8864075E277A35B4001446A6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A81981CB76C26A21D826FD23 /* Pods-SignUpForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignUpForm.release.xcconfig"; path = "Target Support Files/Pods-SignUpForm/Pods-SignUpForm.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB2FDEA8F804F76A20D55D3C /* Pods_SignUpForm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +42,8 @@
 			children = (
 				88640756277A35B2001446A6 /* SignUpForm */,
 				88640755277A35B2001446A6 /* Products */,
+				94E08A99C773198CB650038C /* Pods */,
+				BD48D1F65BB4998D22625375 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		94E08A99C773198CB650038C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6909CBD317C594B5BFEBBED2 /* Pods-SignUpForm.debug.xcconfig */,
+				A81981CB76C26A21D826FD23 /* Pods-SignUpForm.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BD48D1F65BB4998D22625375 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C7FF96EBED300A930C52A08 /* Pods_SignUpForm.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,17 +99,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88640762277A35B4001446A6 /* Build configuration list for PBXNativeTarget "SignUpForm" */;
 			buildPhases = (
+				3B8C47BC6854F331D74FCAB3 /* [CP] Check Pods Manifest.lock */,
 				88640750277A35B2001446A6 /* Sources */,
 				88640751277A35B2001446A6 /* Frameworks */,
 				88640752277A35B2001446A6 /* Resources */,
+				53F0047A2781E0B1E9FD87C2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SignUpForm;
-			packageProductDependencies = (
-			);
 			productName = SignUpForm;
 			productReference = 88640754277A35B2001446A6 /* SignUpForm.app */;
 			productType = "com.apple.product-type.application";
@@ -113,8 +138,6 @@
 				Base,
 			);
 			mainGroup = 8864074B277A35B2001446A6;
-			packageReferences = (
-			);
 			productRefGroup = 88640755277A35B2001446A6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -135,6 +158,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B8C47BC6854F331D74FCAB3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SignUpForm-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53F0047A2781E0B1E9FD87C2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SignUpForm/Pods-SignUpForm-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SignUpForm/Pods-SignUpForm-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SignUpForm/Pods-SignUpForm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		88640750277A35B2001446A6 /* Sources */ = {
@@ -267,6 +332,7 @@
 		};
 		88640763277A35B4001446A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6909CBD317C594B5BFEBBED2 /* Pods-SignUpForm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -297,6 +363,7 @@
 		};
 		88640764277A35B4001446A6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A81981CB76C26A21D826FD23 /* Pods-SignUpForm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
