@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Navajo_Swift
 
 // MARK: - View Model
 class SignUpFormViewModel: ObservableObject {
@@ -15,6 +16,7 @@ class SignUpFormViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var passwordConfirmation: String = ""
+    @Published var passwordStrength: PasswordStrength = .veryWeak
     
     // MARK: Output
     @Published var usernameMessage: String = ""
@@ -45,6 +47,12 @@ class SignUpFormViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }()
     
+    private lazy var isPasswordStrongPublisher: AnyPublisher<Bool, Never> = {
+        $passwordStrength
+            .map{ $0 == .reasonable || $0 == .strong || $0 == .veryStrong }
+            .eraseToAnyPublisher()
+    }()
+    
     private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
         Publishers.CombineLatest3(isPasswordEmptyPublisher, isPasswordLengthValidPublisher, isPasswordMatchingPublisher)
             .map { !$0 && $1 && $2 }
@@ -58,19 +66,23 @@ class SignUpFormViewModel: ObservableObject {
     }()
     
     init() {
+        passwordStrength = Navajo.strength(ofPassword: password)
+        
         isFormValidPublisher
             .assign(to: &$isValid)
         isUsernameLengthValidPublisher
             .map { $0 ? "" : "Username too short. Needs to be at least 3 characters." }
             .assign(to: &$usernameMessage)
         
-        Publishers.CombineLatest3(isPasswordEmptyPublisher, isPasswordLengthValidPublisher, isPasswordMatchingPublisher)
-            .map { isPasswordEmpty, isPasswordLengthValid, isPasswordMatching in
+        Publishers.CombineLatest4(isPasswordEmptyPublisher, isPasswordLengthValidPublisher, isPasswordStrongPublisher,  isPasswordMatchingPublisher)
+            .map { isPasswordEmpty, isPasswordLengthValid ,isPasswordStrong, isPasswordMatching in
                 if isPasswordEmpty {
                     return "Password must not be empty"
                 }
                 else if !isPasswordLengthValid {
                     return "Password must be longer than 7 characters"
+                } else if !isPasswordStrong {
+                    return "Password is too weak"
                 }
                 else if !isPasswordMatching {
                     return "Passwords do not match"
