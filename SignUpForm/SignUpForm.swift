@@ -27,12 +27,42 @@ class SignUpFormViewModel: ObservableObject {
         .eraseToAnyPublisher()
     }()
     
+    private lazy var isPasswordEmptyPublisher: AnyPublisher<Bool, Never> = {
+        $password
+            .map(\.isEmpty)
+            .eraseToAnyPublisher()
+    }()
+    
+    private lazy var isPasswordMatchingPublisher: AnyPublisher<Bool, Never> = {
+      Publishers.CombineLatest($password, $passwordConfirmation)
+        .map(==)
+        .eraseToAnyPublisher()
+    }()
+
+    private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
+        Publishers.CombineLatest(isPasswordEmptyPublisher, isPasswordMatchingPublisher)
+        .map { !$0 && $1 }
+        .eraseToAnyPublisher()
+    }()
+    
     init() {
         isUsernameLengthValidPublisher
             .assign(to: &$isValid)
         isUsernameLengthValidPublisher
             .map { $0 ? "" : "Username too short. Needs to be at least 3 characters." }
         .assign(to: &$usernameMessage)
+        
+        Publishers.CombineLatest(isPasswordEmptyPublisher, isPasswordMatchingPublisher)
+            .map { isPasswordEmpty, isPasswordMatching in
+                if isPasswordEmpty {
+                    return "Password must not be empty"
+                }
+                else if !isPasswordMatching {
+                    return "Passwords do not match"
+                }
+                return ""
+            }
+            .assign(to: &$passwordMessage)
     }
 }
 
