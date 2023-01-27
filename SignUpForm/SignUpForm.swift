@@ -54,8 +54,8 @@ class SignUpFormViewModel: ObservableObject {
     }()
     
     private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
-        Publishers.CombineLatest3(isPasswordEmptyPublisher, isPasswordLengthValidPublisher, isPasswordMatchingPublisher)
-            .map { !$0 && $1 && $2 }
+        Publishers.CombineLatest4(isPasswordEmptyPublisher, isPasswordLengthValidPublisher, isPasswordStrongPublisher, isPasswordMatchingPublisher)
+            .map { !$0 && $1 && $2 && $3 }
             .eraseToAnyPublisher()
     }()
     
