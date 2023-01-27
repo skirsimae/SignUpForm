@@ -33,6 +33,12 @@ class SignUpFormViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }()
     
+    private lazy var isPasswordLengthValidPublisher: AnyPublisher<Bool, Never> = {
+        $password
+            .map{ $0.count >= 8 }
+            .eraseToAnyPublisher()
+    }()
+    
     private lazy var isPasswordMatchingPublisher: AnyPublisher<Bool, Never> = {
         Publishers.CombineLatest($password, $passwordConfirmation)
             .map(==)
@@ -40,8 +46,8 @@ class SignUpFormViewModel: ObservableObject {
     }()
     
     private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
-        Publishers.CombineLatest(isPasswordEmptyPublisher, isPasswordMatchingPublisher)
-            .map { !$0 && $1 }
+        Publishers.CombineLatest3(isPasswordEmptyPublisher, isPasswordLengthValidPublisher, isPasswordMatchingPublisher)
+            .map { !$0 && $1 && $2 }
             .eraseToAnyPublisher()
     }()
     
@@ -58,10 +64,13 @@ class SignUpFormViewModel: ObservableObject {
             .map { $0 ? "" : "Username too short. Needs to be at least 3 characters." }
             .assign(to: &$usernameMessage)
         
-        Publishers.CombineLatest(isPasswordEmptyPublisher, isPasswordMatchingPublisher)
-            .map { isPasswordEmpty, isPasswordMatching in
+        Publishers.CombineLatest3(isPasswordEmptyPublisher, isPasswordLengthValidPublisher, isPasswordMatchingPublisher)
+            .map { isPasswordEmpty, isPasswordLengthValid, isPasswordMatching in
                 if isPasswordEmpty {
                     return "Password must not be empty"
+                }
+                else if !isPasswordLengthValid {
+                    return "Password must be longer than 7 characters"
                 }
                 else if !isPasswordMatching {
                     return "Passwords do not match"
