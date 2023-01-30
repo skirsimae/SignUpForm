@@ -29,12 +29,13 @@ class SignUpFormViewModel: ObservableObject {
     }()
     
     private lazy var isUsernameAvailablePublisher: AnyPublisher<Bool, Never> = {
-      $username
-        .flatMap { username in
-            self.authenticationService.checkUsernameAvailable(username: username)
-        }
-        .receive(on: DispatchQueue.main)
-        .eraseToAnyPublisher()
+        $username
+            .debounce(for: 0.8, scheduler: DispatchQueue.main)
+            .flatMap { username in
+                self.authenticationService.checkUsernameAvailable(username: username)
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }()
     
     private lazy var isUsernameValidPublisher: AnyPublisher<UsernameValid, Never> = {
