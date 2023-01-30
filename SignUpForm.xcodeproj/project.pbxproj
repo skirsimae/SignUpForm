@@ -12,6 +12,7 @@
 		8864075C277A35B4001446A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8864075B277A35B4001446A6 /* Assets.xcassets */; };
 		8864075F277A35B4001446A6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8864075E277A35B4001446A6 /* Preview Assets.xcassets */; };
 		AB2FDEA8F804F76A20D55D3C /* Pods_SignUpForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7FF96EBED300A930C52A08 /* Pods_SignUpForm.framework */; };
+		CDC3DFBD2987DB1C00D1FE30 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFBC2987DB1C00D1FE30 /* SignUpFormViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		8864075B277A35B4001446A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8864075E277A35B4001446A6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A81981CB76C26A21D826FD23 /* Pods-SignUpForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignUpForm.release.xcconfig"; path = "Target Support Files/Pods-SignUpForm/Pods-SignUpForm.release.xcconfig"; sourceTree = "<group>"; };
+		CDC3DFBC2987DB1C00D1FE30 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		88640756277A35B2001446A6 /* SignUpForm */ = {
 			isa = PBXGroup;
 			children = (
+				CDC3DFBB2987DAFF00D1FE30 /* View Models */,
 				88640757277A35B2001446A6 /* SignUpFormApp.swift */,
 				88640759277A35B2001446A6 /* SignUpForm.swift */,
 				8864075B277A35B4001446A6 /* Assets.xcassets */,
@@ -80,7 +83,6 @@
 				6909CBD317C594B5BFEBBED2 /* Pods-SignUpForm.debug.xcconfig */,
 				A81981CB76C26A21D826FD23 /* Pods-SignUpForm.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -90,6 +92,14 @@
 				1C7FF96EBED300A930C52A08 /* Pods_SignUpForm.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDC3DFBB2987DAFF00D1FE30 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				CDC3DFBC2987DB1C00D1FE30 /* SignUpFormViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +218,7 @@
 			files = (
 				8864075A277A35B2001446A6 /* SignUpForm.swift in Sources */,
 				88640758277A35B2001446A6 /* SignUpFormApp.swift in Sources */,
+				CDC3DFBD2987DB1C00D1FE30 /* SignUpFormViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
