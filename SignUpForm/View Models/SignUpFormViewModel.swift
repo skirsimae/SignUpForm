@@ -8,7 +8,6 @@
 import Combine
 import Navajo_Swift
 
-// MARK: - View Model
 class SignUpFormViewModel: ObservableObject {
     
     // MARK: Input
