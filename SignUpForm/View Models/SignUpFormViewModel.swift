@@ -16,7 +16,6 @@ class SignUpFormViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var passwordConfirmation: String = ""
-    @Published var passwordStrength: PasswordStrength = .veryWeak
     
     // MARK: Output
     @Published var usernameMessage: String = ""
@@ -37,6 +36,21 @@ class SignUpFormViewModel: ObservableObject {
         .eraseToAnyPublisher()
     }()
     
+    private lazy var isUsernameValidPublisher: AnyPublisher<UsernameValid, Never> = {
+        Publishers.CombineLatest(isUsernameLengthValidPublisher, isUsernameAvailablePublisher)
+            .map { longEnough, available in
+                if !longEnough {
+                    return .tooShort
+                }
+                if !available {
+                    return .notAvailable
+                }
+                return .valid
+            }
+            .share()
+            .eraseToAnyPublisher()
+    }()
+    
     private lazy var isPasswordEmptyPublisher: AnyPublisher<Bool, Never> = {
         $password
             .map(\.isEmpty)
@@ -55,10 +69,23 @@ class SignUpFormViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }()
     
+    private lazy var passwordStrengthPublisher: AnyPublisher<PasswordStrength, Never> = {
+      $password
+        .map(Navajo.strength(ofPassword:))
+        .eraseToAnyPublisher()
+    }()
+    
     private lazy var isPasswordStrongPublisher: AnyPublisher<Bool, Never> = {
-        $passwordStrength
-            .map{ $0 == .reasonable || $0 == .strong || $0 == .veryStrong }
-            .eraseToAnyPublisher()
+      passwordStrengthPublisher
+        .map { passwordStrength in
+          switch passwordStrength {
+          case .veryWeak, .weak:
+            return false
+          case .reasonable, .strong, .veryStrong:
+            return true
+          }
+        }
+        .eraseToAnyPublisher()
     }()
     
     private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
@@ -74,8 +101,6 @@ class SignUpFormViewModel: ObservableObject {
     }()
     
     init() {
-        passwordStrength = Navajo.strength(ofPassword: password)
-        
         isUsernameAvailablePublisher
           .assign(to: &$isValid)
         isUsernameAvailablePublisher
