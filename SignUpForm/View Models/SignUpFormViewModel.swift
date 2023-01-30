@@ -31,6 +31,7 @@ class SignUpFormViewModel: ObservableObject {
     private lazy var isUsernameAvailablePublisher: AnyPublisher<Bool, Never> = {
         $username
             .debounce(for: 0.8, scheduler: DispatchQueue.main)
+            .removeDuplicates()
             .flatMap { username in
                 self.authenticationService.checkUsernameAvailable(username: username)
             }
