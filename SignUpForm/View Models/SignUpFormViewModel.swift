@@ -35,6 +35,7 @@ class SignUpFormViewModel: ObservableObject {
                 self.authenticationService.checkUsernameAvailable(username: username)
             }
             .receive(on: DispatchQueue.main)
+            .share()
             .eraseToAnyPublisher()
     }()
     
