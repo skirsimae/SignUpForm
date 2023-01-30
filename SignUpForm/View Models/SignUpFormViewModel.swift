@@ -73,22 +73,22 @@ class SignUpFormViewModel: ObservableObject {
     }()
     
     private lazy var passwordStrengthPublisher: AnyPublisher<PasswordStrength, Never> = {
-      $password
-        .map(Navajo.strength(ofPassword:))
-        .eraseToAnyPublisher()
+        $password
+            .map(Navajo.strength(ofPassword:))
+            .eraseToAnyPublisher()
     }()
     
     private lazy var isPasswordStrongPublisher: AnyPublisher<Bool, Never> = {
-      passwordStrengthPublisher
-        .map { passwordStrength in
-          switch passwordStrength {
-          case .veryWeak, .weak:
-            return false
-          case .reasonable, .strong, .veryStrong:
-            return true
-          }
-        }
-        .eraseToAnyPublisher()
+        passwordStrengthPublisher
+            .map { passwordStrength in
+                switch passwordStrength {
+                case .veryWeak, .weak:
+                    return false
+                case .reasonable, .strong, .veryStrong:
+                    return true
+                }
+            }
+            .eraseToAnyPublisher()
     }()
     
     private lazy var isPasswordValidPublisher: AnyPublisher<Bool, Never> = {
@@ -105,13 +105,13 @@ class SignUpFormViewModel: ObservableObject {
     
     init() {
         isUsernameAvailablePublisher
-          .assign(to: &$isValid)
+            .assign(to: &$isValid)
         isUsernameAvailablePublisher
-          .map {
-            $0 ? ""
-               : "Username not available. Try a different one."
-          }
-          .assign(to: &$usernameMessage)
+            .map {
+                $0 ? ""
+                : "Username not available. Try a different one."
+            }
+            .assign(to: &$usernameMessage)
         
         isFormValidPublisher
             .assign(to: &$isValid)
