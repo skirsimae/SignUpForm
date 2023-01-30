@@ -33,6 +33,7 @@ class SignUpFormViewModel: ObservableObject {
         .flatMap { username in
             self.authenticationService.checkUsernameAvailable(username: username)
         }
+        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }()
     
