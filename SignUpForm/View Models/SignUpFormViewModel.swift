@@ -10,6 +10,8 @@ import Navajo_Swift
 
 class SignUpFormViewModel: ObservableObject {
     
+    private var authenticationService = AuthenticationService()
+    
     // MARK: Input
     @Published var username: String = ""
     @Published var password: String = ""
@@ -25,6 +27,14 @@ class SignUpFormViewModel: ObservableObject {
         $username
             .map { $0.count >= 3 }
             .eraseToAnyPublisher()
+    }()
+    
+    private lazy var isUsernameAvailablePublisher: AnyPublisher<Bool, Never> = {
+      $username
+        .flatMap { username in
+            self.authenticationService.checkUsernameAvailable(username: username)
+        }
+        .eraseToAnyPublisher()
     }()
     
     private lazy var isPasswordEmptyPublisher: AnyPublisher<Bool, Never> = {
@@ -65,6 +75,15 @@ class SignUpFormViewModel: ObservableObject {
     
     init() {
         passwordStrength = Navajo.strength(ofPassword: password)
+        
+        isUsernameAvailablePublisher
+          .assign(to: &$isValid)
+        isUsernameAvailablePublisher
+          .map {
+            $0 ? ""
+               : "Username not available. Try a different one."
+          }
+          .assign(to: &$usernameMessage)
         
         isFormValidPublisher
             .assign(to: &$isValid)

@@ -13,7 +13,8 @@
 		8864075F277A35B4001446A6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8864075E277A35B4001446A6 /* Preview Assets.xcassets */; };
 		AB2FDEA8F804F76A20D55D3C /* Pods_SignUpForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7FF96EBED300A930C52A08 /* Pods_SignUpForm.framework */; };
 		CDC3DFBD2987DB1C00D1FE30 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFBC2987DB1C00D1FE30 /* SignUpFormViewModel.swift */; };
-		CDC3DFC02987E22100D1FE30 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFBF2987E22100D1FE30 /* Service.swift */; };
+		CDC3DFC02987E22100D1FE30 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFBF2987E22100D1FE30 /* AuthenticationService.swift */; };
+		CDC3DFC32987EB7E00D1FE30 /* UserNameAvailableMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFC22987EB7E00D1FE30 /* UserNameAvailableMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +27,8 @@
 		8864075E277A35B4001446A6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A81981CB76C26A21D826FD23 /* Pods-SignUpForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignUpForm.release.xcconfig"; path = "Target Support Files/Pods-SignUpForm/Pods-SignUpForm.release.xcconfig"; sourceTree = "<group>"; };
 		CDC3DFBC2987DB1C00D1FE30 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
-		CDC3DFBF2987E22100D1FE30 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		CDC3DFBF2987E22100D1FE30 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		CDC3DFC22987EB7E00D1FE30 /* UserNameAvailableMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameAvailableMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		88640756277A35B2001446A6 /* SignUpForm */ = {
 			isa = PBXGroup;
 			children = (
+				CDC3DFC12987EB7000D1FE30 /* Models */,
 				CDC3DFBE2987E20A00D1FE30 /* Services */,
 				CDC3DFBB2987DAFF00D1FE30 /* View Models */,
 				88640757277A35B2001446A6 /* SignUpFormApp.swift */,
@@ -108,9 +111,17 @@
 		CDC3DFBE2987E20A00D1FE30 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CDC3DFBF2987E22100D1FE30 /* Service.swift */,
+				CDC3DFBF2987E22100D1FE30 /* AuthenticationService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		CDC3DFC12987EB7000D1FE30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CDC3DFC22987EB7E00D1FE30 /* UserNameAvailableMessage.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8864075A277A35B2001446A6 /* SignUpForm.swift in Sources */,
-				CDC3DFC02987E22100D1FE30 /* Service.swift in Sources */,
+				CDC3DFC02987E22100D1FE30 /* AuthenticationService.swift in Sources */,
+				CDC3DFC32987EB7E00D1FE30 /* UserNameAvailableMessage.swift in Sources */,
 				88640758277A35B2001446A6 /* SignUpFormApp.swift in Sources */,
 				CDC3DFBD2987DB1C00D1FE30 /* SignUpFormViewModel.swift in Sources */,
 			);
