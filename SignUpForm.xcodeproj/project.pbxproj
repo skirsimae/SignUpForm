@@ -64,11 +64,11 @@
 		88640756277A35B2001446A6 /* SignUpForm */ = {
 			isa = PBXGroup;
 			children = (
+				CDC3DFC42987ED7F00D1FE30 /* Screens */,
 				CDC3DFC12987EB7000D1FE30 /* Models */,
 				CDC3DFBE2987E20A00D1FE30 /* Services */,
 				CDC3DFBB2987DAFF00D1FE30 /* View Models */,
 				88640757277A35B2001446A6 /* SignUpFormApp.swift */,
-				88640759277A35B2001446A6 /* SignUpForm.swift */,
 				8864075B277A35B4001446A6 /* Assets.xcassets */,
 				8864075D277A35B4001446A6 /* Preview Content */,
 			);
@@ -122,6 +122,14 @@
 				CDC3DFC22987EB7E00D1FE30 /* UserNameAvailableMessage.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CDC3DFC42987ED7F00D1FE30 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				88640759277A35B2001446A6 /* SignUpForm.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
