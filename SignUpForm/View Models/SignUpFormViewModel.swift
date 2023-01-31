@@ -11,6 +11,7 @@ import Navajo_Swift
 class SignUpFormViewModel: ObservableObject {
     
     private var authenticationService = AuthenticationService()
+    typealias Available = Result<Bool, Error>
     
     // MARK: Input
     @Published var username: String = ""
@@ -28,12 +29,13 @@ class SignUpFormViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }()
     
-    private lazy var isUsernameAvailablePublisher: AnyPublisher<Bool, Never> = {
+    private lazy var isUsernameAvailablePublisher: AnyPublisher<Available, Never> = {
         $username
             .debounce(for: 0.8, scheduler: DispatchQueue.main)
             .removeDuplicates()
-            .flatMap { username in
+            .flatMap { username -> AnyPublisher<Available, Never> in
                 self.authenticationService.checkUsernameAvailable(username: username)
+                    .asResult()
             }
             .receive(on: DispatchQueue.main)
             .share()
@@ -106,13 +108,34 @@ class SignUpFormViewModel: ObservableObject {
     
     init() {
         isUsernameAvailablePublisher
-            .assign(to: &$isValid)
-        isUsernameAvailablePublisher
-            .map {
-                $0 ? ""
-                : "Username not available. Try a different one."
+            .map { result in
+                switch result {
+                case .failure(let error):
+                    if case APIError.transportError(_) = error {
+                        return ""
+                    } else {
+                        return error.localizedDescription
+                    }
+                case .success(let isAvailable):
+                    return isAvailable ? "" : "This username is not available"
+                }
             }
             .assign(to: &$usernameMessage)
+        
+        isUsernameAvailablePublisher
+            .map { result in
+                if case .failure(let error) = result {
+                    if case APIError.transportError(_) = error {
+                        return true
+                    }
+                    return false
+                }
+                if case .success(let isAvailable) = result {
+                    return isAvailable
+                }
+                return true
+            }
+            .assign(to: &$isValid)
         
         isFormValidPublisher
             .assign(to: &$isValid)
@@ -136,5 +159,18 @@ class SignUpFormViewModel: ObservableObject {
                 return ""
             }
             .assign(to: &$passwordMessage)
+    }
+}
+
+extension Publisher {
+    func asResult() ->
+    AnyPublisher<Result<Output, Failure>, Never>
+    {
+        self
+            .map(Result.success)
+            .catch { error in
+                Just(.failure(error))
+            }
+            .eraseToAnyPublisher()
     }
 }
