@@ -48,8 +48,20 @@ class SignUpFormViewModel: ObservableObject {
                 if !longEnough {
                     return .tooShort
                 }
-                if !available {
-                    return .notAvailable
+                
+                let availabilityResult = available.map{ $0 }
+                
+                switch availabilityResult {
+                case .failure(let error):
+                    if case APIError.transportError(_) = error {
+                        return .valid
+                    } else {
+                        return .notAvailable
+                    }
+                case .success(let isAvailable):
+                    if isAvailable {
+                        return .valid
+                    }
                 }
                 return .valid
             }
@@ -121,21 +133,6 @@ class SignUpFormViewModel: ObservableObject {
                 }
             }
             .assign(to: &$usernameMessage)
-        
-        isUsernameAvailablePublisher
-            .map { result in
-                if case .failure(let error) = result {
-                    if case APIError.transportError(_) = error {
-                        return true
-                    }
-                    return false
-                }
-                if case .success(let isAvailable) = result {
-                    return isAvailable
-                }
-                return true
-            }
-            .assign(to: &$isValid)
         
         isFormValidPublisher
             .assign(to: &$isValid)
