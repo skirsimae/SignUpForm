@@ -22,6 +22,7 @@ class SignUpFormViewModel: ObservableObject {
     @Published var usernameMessage: String = ""
     @Published var passwordMessage: String = ""
     @Published var isValid: Bool = false
+    @Published var showUpdateDialog: Bool = false
     
     private lazy var isUsernameLengthValidPublisher: AnyPublisher<Bool, Never> = {
         $username
@@ -127,6 +128,8 @@ class SignUpFormViewModel: ObservableObject {
                         return ""
                     } else if case APIError.validationError(let reason) = error {
                         return reason
+                    } else if case APIError.serverError(statusCode: _, reason: let reason, retryAfter: _) = error {
+                        return reason ?? "Server error"
                     }
                     else {
                         return error.localizedDescription
@@ -136,6 +139,17 @@ class SignUpFormViewModel: ObservableObject {
                 }
             }
             .assign(to: &$usernameMessage)
+        
+        isUsernameAvailablePublisher
+            .map { result in
+                if case .failure(let error) = result {
+                    if case APIError.decodingError = error {
+                        return true
+                    }
+                }
+                return false
+            }
+            .assign(to: &$showUpdateDialog)
         
         isFormValidPublisher
             .assign(to: &$isValid)
