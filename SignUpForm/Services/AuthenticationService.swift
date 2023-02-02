@@ -45,7 +45,8 @@ class AuthenticationService {
             return Fail(error: APIError.invalidRequestError("URL invalid"))
                 .eraseToAnyPublisher()
         }
-        return URLSession.shared.dataTaskPublisher(for: url)
+        
+        let dataTaskPublisher = URLSession.shared.dataTaskPublisher(for: url)
             .mapError { error -> Error in
                 return APIError.transportError(error)
             }
@@ -63,11 +64,25 @@ class AuthenticationService {
                         throw APIError.validationError(apiError.reason)
                     }
                     if (500..<600) ~= urlResponse.statusCode {
-                      let retryAfter = urlResponse.value(forHTTPHeaderField: "Retry-After")
-                      throw APIError.serverError(statusCode: urlResponse.statusCode, reason: apiError.reason, retryAfter: retryAfter)
+                        let retryAfter = urlResponse.value(forHTTPHeaderField: "Retry-After")
+                        throw APIError.serverError(statusCode: urlResponse.statusCode, reason: apiError.reason, retryAfter: retryAfter)
                     }
                 }
                 return (data, response)
+            }
+        
+        return dataTaskPublisher
+            .tryCatch { error -> AnyPublisher<(data: Data, response: URLResponse), Error> in
+                if case APIError.serverError =  error {
+                    return Just(())
+                        .delay(for: 3, scheduler: DispatchQueue.global())
+                        .flatMap { _ in
+                            return dataTaskPublisher
+                        }
+                        .retry(10)
+                        .eraseToAnyPublisher()
+                }
+                throw error
             }
             .map(\.data)
             .tryMap { data -> UsernameAvailableMessage in
@@ -79,6 +94,7 @@ class AuthenticationService {
                     throw APIError.decodingError(error)
                 }
             }
+        
             .map(\.isAvailable)
             .eraseToAnyPublisher()
     }
