@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserNameAvailableMessage: Codable {
+struct UsernameAvailableMessage: Codable {
   var isAvailable: Bool
   var userName: String
 }

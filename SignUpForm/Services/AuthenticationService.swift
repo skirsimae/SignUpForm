@@ -10,7 +10,14 @@ import Combine
 
 enum APIError: LocalizedError {
     case invalidRequestError(String)
+    case validationError(String)
     case transportError(Error)
+    case invalidResponse
+}
+
+struct APIErrorMessage: Decodable {
+    var error: Bool
+    var reason: String
 }
 
 class AuthenticationService {
@@ -21,9 +28,26 @@ class AuthenticationService {
         }
         return URLSession.shared.dataTaskPublisher(for: url)
             .mapError { error -> Error in
-              return APIError.transportError(error)
+                return APIError.transportError(error)
             }
-            .map( \.data)
+            .tryMap { (data, response) -> (data: Data, response: URLResponse) in
+                print("Received response from server, now checking status code")
+                guard let urlResponse = response as? HTTPURLResponse else {
+                    throw APIError.invalidResponse
+                }
+                if (200..<300) ~= urlResponse.statusCode {
+                }
+                else {
+                    let decoder = JSONDecoder()
+                    let apiError = try decoder.decode(APIErrorMessage.self, from: data)
+                    if urlResponse.statusCode == 400 {
+                        throw APIError.validationError(apiError.reason)
+                    }
+                }
+                return (data, response)
+            }
+            .map(\.data)
+            }
             .decode(type: UserNameAvailableMessage.self, decoder: JSONDecoder())
             .map(\.isAvailable)
             .eraseToAnyPublisher()

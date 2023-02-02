@@ -14,7 +14,7 @@
 		AB2FDEA8F804F76A20D55D3C /* Pods_SignUpForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7FF96EBED300A930C52A08 /* Pods_SignUpForm.framework */; };
 		CDC3DFBD2987DB1C00D1FE30 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFBC2987DB1C00D1FE30 /* SignUpFormViewModel.swift */; };
 		CDC3DFC02987E22100D1FE30 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFBF2987E22100D1FE30 /* AuthenticationService.swift */; };
-		CDC3DFC32987EB7E00D1FE30 /* UserNameAvailableMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFC22987EB7E00D1FE30 /* UserNameAvailableMessage.swift */; };
+		CDC3DFC32987EB7E00D1FE30 /* UsernameAvailableMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFC22987EB7E00D1FE30 /* UsernameAvailableMessage.swift */; };
 		CDC3DFC62987EF0000D1FE30 /* UsernameValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC3DFC52987EF0000D1FE30 /* UsernameValid.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,7 @@
 		A81981CB76C26A21D826FD23 /* Pods-SignUpForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignUpForm.release.xcconfig"; path = "Target Support Files/Pods-SignUpForm/Pods-SignUpForm.release.xcconfig"; sourceTree = "<group>"; };
 		CDC3DFBC2987DB1C00D1FE30 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		CDC3DFBF2987E22100D1FE30 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		CDC3DFC22987EB7E00D1FE30 /* UserNameAvailableMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameAvailableMessage.swift; sourceTree = "<group>"; };
+		CDC3DFC22987EB7E00D1FE30 /* UsernameAvailableMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameAvailableMessage.swift; sourceTree = "<group>"; };
 		CDC3DFC52987EF0000D1FE30 /* UsernameValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +121,7 @@
 		CDC3DFC12987EB7000D1FE30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CDC3DFC22987EB7E00D1FE30 /* UserNameAvailableMessage.swift */,
+				CDC3DFC22987EB7E00D1FE30 /* UsernameAvailableMessage.swift */,
 				CDC3DFC52987EF0000D1FE30 /* UsernameValid.swift */,
 			);
 			path = Models;
@@ -252,7 +252,7 @@
 				CDC3DFC62987EF0000D1FE30 /* UsernameValid.swift in Sources */,
 				8864075A277A35B2001446A6 /* SignUpForm.swift in Sources */,
 				CDC3DFC02987E22100D1FE30 /* AuthenticationService.swift in Sources */,
-				CDC3DFC32987EB7E00D1FE30 /* UserNameAvailableMessage.swift in Sources */,
+				CDC3DFC32987EB7E00D1FE30 /* UsernameAvailableMessage.swift in Sources */,
 				88640758277A35B2001446A6 /* SignUpFormApp.swift in Sources */,
 				CDC3DFBD2987DB1C00D1FE30 /* SignUpFormViewModel.swift in Sources */,
 			);

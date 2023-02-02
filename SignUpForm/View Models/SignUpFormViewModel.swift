@@ -125,7 +125,10 @@ class SignUpFormViewModel: ObservableObject {
                 case .failure(let error):
                     if case APIError.transportError(_) = error {
                         return ""
-                    } else {
+                    } else if case APIError.validationError(let reason) = error {
+                        return reason
+                    }
+                    else {
                         return error.localizedDescription
                     }
                 case .success(let isAvailable):
